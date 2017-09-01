@@ -1,18 +1,18 @@
-var express = require('express');
-var router = express.Router();
-var gConfig = require('../common/config');
-var logger = require('../common/logger');
-var utils = require('../common/utils');
-var modelUser = require('../models/user');
-router.get('/', function(req, res, next) {
-  modelUser.getLoginUser().then(function(data) {
+const express = require('express');
+const router = express.Router();
+const gConfig = require('../common/config');
+const logger = require('../common/logger');
+const utils = require('../common/utils');
+const modelUser = require('../models/user');
+router.get('/', (req, res, next) => {
+  modelUser.getLoginUser().then(data => {
     res.render('index', {
       title: 'node-express-boilerplate',
       isDev: gConfig.isEnvDev,
       isProd: gConfig.isEnvProd,
       user: JSON.stringify(data)
     });
-  }, function(err) {
+  }, err => {
     logger.error('getLoginUser', err);
     res.render('error', {message: 500});
   });

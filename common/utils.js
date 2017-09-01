@@ -1,6 +1,6 @@
-var gConfig = require('./config');
-var funcCollection = {};
-funcCollection.zeroPad2 = function(value) {
+const gConfig = require('./config');
+const funcCollection = {};
+funcCollection.zeroPad2 = (value) => {
   value = parseInt(value);
   return (value > 9
     ? ''

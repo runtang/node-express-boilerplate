@@ -1,14 +1,14 @@
-var nodeEnv = process.env.NODE_ENV || 'production';
-var isEnvDev = nodeEnv === 'development';
-var isEnvStaging = nodeEnv === 'staging';
-var isEnvProd = nodeEnv === 'production';
-var config = {
+const nodeEnv = process.env.NODE_ENV || 'production';
+const isEnvDev = nodeEnv === 'development';
+const isEnvStaging = nodeEnv === 'staging';
+const isEnvProd = nodeEnv === 'production';
+const config = {
   env: nodeEnv,
   isEnvDev: isEnvDev,
   isEnvStaging: isEnvStaging,
   isEnvProd: isEnvProd
 };
-var configMap = {};
+const configMap = {};
 configMap.s3 = {
   development: {
     key: 'xxx',
@@ -26,8 +26,8 @@ configMap.s3 = {
 configMap.db = {
   url: 'https://xxx.yyy'
 };
-Object.keys(configMap).forEach(function(key) {
-  var item = configMap[key];
+Object.keys(configMap).forEach(key => {
+  let item = configMap[key];
   config[key] = item[nodeEnv]
     ? item[nodeEnv]
     : item;
