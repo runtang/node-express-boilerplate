@@ -6,8 +6,12 @@ const utils = require('../common/utils');
 const modelUser = require('../models/user');
 router.get('/', (req, res, next) => {
   modelUser.getLoginUser().then(data => {
+    req.session.count = !req.session.count
+      ? 1
+      : ++req.session.count;
     res.render('index', {
       title: 'node-express-boilerplate',
+      count: req.session.count,
       isDev: gConfig.isEnvDev,
       isProd: gConfig.isEnvProd,
       user: JSON.stringify(data)

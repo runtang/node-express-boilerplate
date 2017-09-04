@@ -4,6 +4,7 @@ const favicon = require('serve-favicon');
 const morgan = require('morgan');
 const logger = require('./common/logger');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const routerIndex = require('./routes/index');
 const app = express();
@@ -17,6 +18,14 @@ app.use(require('./middlewares/logger'));
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({extended: false, limit: '5mb'}));
 app.use(cookieParser());
+app.use(session({
+  secret: 'recommand 128 bytes random string',
+  cookie: {
+    maxAge: 10 * 1000
+  },
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routerIndex);
 // catch 404 and forward to error handler
