@@ -1,3 +1,4 @@
+require('./authentication').init();
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -6,6 +7,7 @@ const logger = require('./common/logger');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const routerIndex = require('./routes/index');
 const app = express();
 // view engine setup
@@ -21,11 +23,13 @@ app.use(cookieParser());
 app.use(session({
   secret: 'recommand 128 bytes random string',
   cookie: {
-    maxAge: 10 * 1000
+    maxAge: 60 * 1000
   },
-  resave: false,
+  resave: true,
   saveUninitialized: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routerIndex);
 // catch 404 and forward to error handler
