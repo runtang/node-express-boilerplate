@@ -14,4 +14,5 @@ logger.stream = {
     logger.info(message);
   }
 };
-module.exports = require('morgan')('combined', {'stream': logger.stream});
+const logFormat = ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status Time: :response-time ms Length: :res[content-length] ":referrer" ":user-agent"';
+module.exports = require('morgan')(logFormat, {'stream': logger.stream});

@@ -8,6 +8,7 @@ const transports = [
     filename: path.join(__dirname, '../log', 'log'),
     datePattern: 'yyyy-MM-dd.',
     prepend: true,
+    json: false,
     level: gConfig.isEnvDev
       ? 'debug'
       : 'info'
